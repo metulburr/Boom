@@ -4,6 +4,8 @@ import pygame as pg
 from .. import tools
 import os
 import random
+import copy
+from ..card import Card
 
 class Testing(tools.States):
     def __init__(self, screen_rect): 
@@ -22,7 +24,7 @@ class Testing(tools.States):
         self.bg_color = (255,255,255)
         self.pause = False
         self.card_bufferX = 100
-        self.card_bufferY = 75
+        self.card_bufferY = 25
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
@@ -51,34 +53,45 @@ class Testing(tools.States):
             card_left_side = card.rect.inflate(-half_width, 0)
             card_left_side.x -= int(half_width/2)
             if card_left_side.collidepoint(pg.mouse.get_pos()):
-                card.selected = not card.selected
+                if self.same_bool(self.hand_selected()) or card.selected:
+                    card.selected = not card.selected
+                    
+    def hand_selected(self):
+        c = []
+        for card in self.hand:
+            c.append(card.selected)
+        return c
                 
     def same_bool(self, lister):
         return all(lister) or not any(lister)
 
     def update(self, now, keys):
         if not self.pause:
-            self.update_hand()
+            self.update_hand_position()
         else:
             self.pause_text, self.pause_rect = self.make_text("Menu",
                 (255,255,255), self.screen_rect.center, 50)
 
     def render(self, screen):
         screen.fill(self.bg_color)
+        selected_card = None
         for card in self.hand:
-            print('render {}'.format(card.rect.x))
-            screen.blit(card.surf, (card.rect.x, card.rect.y))
+            if card.selected:
+                selected_card = card
+            else:
+                screen.blit(card.surf, (card.rect.x, card.rect.y))
+        if selected_card:
+            screen.blit(selected_card.surf, (selected_card.rect.x, selected_card.rect.y))
         if self.pause:
             screen.blit(self.overlay_bg,(0,0))
             screen.blit(self.pause_text, self.pause_rect)
 
-    def update_hand(self):
+    def update_hand_position(self):
         for i, card in enumerate(self.hand):
             card.rect.y = self.screen_rect.bottom - card.surf.get_height()
             if card.selected:
                 card.rect.y -= self.card_bufferY
-            card.rect.x = i*self.card_bufferX 
-            print('update {}'.format(card.rect.x))
+            card.rect.x = i * self.card_bufferX 
             
     def get_hand_cards(self):
         hand_cards = []
@@ -88,13 +101,25 @@ class Testing(tools.States):
         return hand_cards
         
     def set_hand(self):
+        '''BUGFIX need to get any number of types of cards'''
+        return random.sample(self.get_hand_cards(), 7)
+        '''
         c = self.get_hand_cards()
         hand = []
         for i in range(7):
             card = random.choice(c)
-            hand.append(card)
+            hand.append(copy.copy(card))
         return hand
-            
+        '''
+    def set_cards(self):
+        self.cards = []
+        path = os.path.join(tools.Image.path, 'cards')
+        for root, dirs, files in os.walk(path):
+            for f in files:
+                if f.endswith('.png'):
+                    path = os.path.abspath(os.path.join(root, f))
+                    image = pg.image.load(path)
+                    self.cards.append(Card(path, image))
             
     def cleanup(self):
         pg.mixer.music.unpause()
