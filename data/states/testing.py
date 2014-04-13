@@ -20,11 +20,17 @@ class Testing(tools.States):
         self.overlay_bg.fill(0)
         self.overlay_bg.set_alpha(200)
         
-        self.set_cards()
+        self.make_deck()
         self.bg_color = (255,255,255)
         self.pause = False
         self.card_bufferX = 100
         self.card_bufferY = 25
+        
+    def make_deck(self):
+        self.cards = []
+        self.card_duplicate = 5
+        for i in range(self.card_duplicate):
+            self.cards += self.set_cards()
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
@@ -112,14 +118,15 @@ class Testing(tools.States):
         return hand
         '''
     def set_cards(self):
-        self.cards = []
+        cards = []
         path = os.path.join(tools.Image.path, 'cards')
         for root, dirs, files in os.walk(path):
             for f in files:
                 if f.endswith('.png'):
                     path = os.path.abspath(os.path.join(root, f))
                     image = pg.image.load(path)
-                    self.cards.append(Card(path, image))
+                    cards.append(Card(path, image))
+        return cards
             
     def cleanup(self):
         pg.mixer.music.unpause()
