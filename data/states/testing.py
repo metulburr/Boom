@@ -22,7 +22,7 @@ class Testing(tools.States):
         self.bg_color = (255,255,255)
         self.pause = False
         self.card_bufferX = 100
-        self.card_bufferY = 25
+        self.card_bufferY = 75
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
@@ -42,15 +42,23 @@ class Testing(tools.States):
             pg.mixer.music.play()
             
         elif event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
-            for card in self.hand:
-                half_card = card.rect.inflate(card.rect.x//2, card.rect.y)
-                if half_card.collidepoint(pg.mouse.get_pos()):
-                    card.selected = not card.selected
+            self.select_left_side_of_card()
+            
+    def select_left_side_of_card(self):
+       for card in self.hand:
+            #if card != self.hand[-1]:
+            half_width = int(card.rect.width/2)
+            card_left_side = card.rect.inflate(-half_width, 0)
+            card_left_side.x -= int(half_width/2)
+            if card_left_side.collidepoint(pg.mouse.get_pos()):
+                card.selected = not card.selected
+                
+    def same_bool(self, lister):
+        return all(lister) or not any(lister)
 
     def update(self, now, keys):
         if not self.pause:
             self.update_hand()
-                
         else:
             self.pause_text, self.pause_rect = self.make_text("Menu",
                 (255,255,255), self.screen_rect.center, 50)
@@ -58,19 +66,19 @@ class Testing(tools.States):
     def render(self, screen):
         screen.fill(self.bg_color)
         for card in self.hand:
+            print('render {}'.format(card.rect.x))
             screen.blit(card.surf, (card.rect.x, card.rect.y))
         if self.pause:
             screen.blit(self.overlay_bg,(0,0))
             screen.blit(self.pause_text, self.pause_rect)
 
     def update_hand(self):
-        x = 0
-        for card in self.hand:
+        for i, card in enumerate(self.hand):
             card.rect.y = self.screen_rect.bottom - card.surf.get_height()
             if card.selected:
                 card.rect.y -= self.card_bufferY
-            card.rect.x = x
-            x += self.card_bufferX
+            card.rect.x = i*self.card_bufferX 
+            print('update {}'.format(card.rect.x))
             
     def get_hand_cards(self):
         hand_cards = []
