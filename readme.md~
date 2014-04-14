@@ -1,0 +1,39 @@
+[![Logo](http://i.imgur.com/QE0486f.png)](http://i.imgur.com)
+
+###arguments
+run game with defaults
+
+    python game.py
+list help arguments
+
+    python game.py --help
+fullscreen
+
+    python game.py -f
+difficulty
+
+    python game.py -d hard
+screen size
+
+    python game.py -s 1024 800
+    
+
+
+###controls
+movement 
+
+    WASD or arrow keys
+menu
+
+    mouse or arrow keys
+other
+
+    PAUSE = p key
+    BACK/MENU = escape key
+    SELECT = enter key/left mouse button
+    
+
+    
+###Notes
+The exe is not updated as much as the code
+
