@@ -69,7 +69,6 @@ class Testing(tools.States):
                 self.select_left_side_of_card()
             if self.help_btn_image_rect.collidepoint(pg.mouse.get_pos()):
                 if self.selected_card():
-                    #print('help requested for card {}'.format(card.path))
                     self.help_overlay = not self.help_overlay
             
     def select_left_side_of_card(self):
@@ -81,6 +80,13 @@ class Testing(tools.States):
             if card_left_side.collidepoint(pg.mouse.get_pos()):
                 if self.same_bool(self.hand_selected()) or card.selected:
                     card.selected = not card.selected
+                else: #select new card, and deselect current card
+                    self.set_all_cards_select_to_false()
+                    card.selected = True
+                    
+    def set_all_cards_select_to_false(self):
+        for card in self.hand:
+            card.selected = False
                     
     def selected_card(self):
         for card in self.hand:
