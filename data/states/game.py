@@ -151,23 +151,8 @@ class Game(tools.States):
                 hand_cards.append(card)
         return hand_cards
         
-    def set_hand(self):
-        '''BUGFIX need to get any number of types of cards'''
-        return random.sample(self.get_hand_cards(), 7)
-        '''
-        c = self.get_hand_cards()
-        hand = []
-        for i in range(7):
-            card = random.choice(c)
-            hand.append(copy.copy(card))
-        return hand
-        '''
-        
-    def make_deck(self):
-        self.deck = []
-        self.card_duplicate = 5
-        for i in range(self.card_duplicate):
-            self.deck += self.set_cards()
+    def set_hand(self, card_num):
+        return random.sample(self.get_hand_cards(), card_num)
         
     def create_deck(self):
         path = os.path.join(tools.Image.path, 'cards')
@@ -191,6 +176,6 @@ class Game(tools.States):
     def entry(self):
         if not self.is_hand_set:
             self.is_hand_set = True
-            self.hand = self.set_hand()
+            self.hand = self.set_hand(4)
         pg.mixer.music.pause()
         #pg.mixer.music.play()
