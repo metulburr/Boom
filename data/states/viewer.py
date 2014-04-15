@@ -17,7 +17,7 @@ class Viewer(tools.States):
         self.spacer = 75
         self.card_offsetY = 55
         
-        self.set_cards()
+        self.create_deck()
         self.update_image(0)
         #self.update_category('placeholder')
         

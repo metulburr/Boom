@@ -91,7 +91,7 @@ def render_textrect(string, font, rect, text_color, background_color, justificat
     surface = pg.Surface(rect.size).convert()
     #surface.fill(0)
     #surface.set_alpha(0)
-    surface.fill(background_color)
+    #surface.fill(background_color)
 
     accumulated_height = 0
     for line in final_lines:
@@ -258,7 +258,7 @@ class States:
                 self.selected_index = 0
             self.button_hover.sound.play()
             
-    def set_cards(self):
+    def create_deck(self):
         self.cards = []
         path = os.path.join(Image.path, 'cards')
         for root, dirs, files in os.walk(path):

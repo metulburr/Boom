@@ -21,7 +21,10 @@ class Game(tools.States):
         self.overlay_bg.set_alpha(200)
         self.overlay_card_position = (100,200)
         
-        self.make_deck()
+        self.deck = []
+        self.database = data.data
+        self.create_deck()
+        #self.make_deck()
         self.bg_color = (255,255,255)
         self.help_overlay = False
         self.card_bufferX = 100
@@ -39,13 +42,7 @@ class Game(tools.States):
         self.settings = pg.transform.scale(self.settings, (25,25))
         self.settings_rect = self.settings.get_rect(topleft=(25,0))
         
-        self.database = data.data
         
-    def make_deck(self):
-        self.cards = []
-        self.card_duplicate = 5
-        for i in range(self.card_duplicate):
-            self.cards += self.set_cards()
     
     def get_event(self, event, keys):
         if event.type == pg.QUIT:
@@ -149,7 +146,7 @@ class Game(tools.States):
             
     def get_hand_cards(self):
         hand_cards = []
-        for card in self.cards:
+        for card in self.deck:
             if tools.get_category(card.path) not in ['roles', 'characters']:
                 hand_cards.append(card)
         return hand_cards
@@ -165,16 +162,26 @@ class Game(tools.States):
             hand.append(copy.copy(card))
         return hand
         '''
-    def set_cards(self):
-        cards = []
+        
+    def make_deck(self):
+        self.deck = []
+        self.card_duplicate = 5
+        for i in range(self.card_duplicate):
+            self.deck += self.set_cards()
+        
+    def create_deck(self):
         path = os.path.join(tools.Image.path, 'cards')
         for root, dirs, files in os.walk(path):
             for f in files:
                 if f.endswith('.png'):
                     path = os.path.abspath(os.path.join(root, f))
                     image = pg.image.load(path)
-                    cards.append(card.Card(path, image))
-        return cards
+                    filename = tools.get_filename(path)
+                    for i in range(self.database[filename]['max']):  
+                        self.deck.append(card.Card(path, image))
+        #for c in self.deck:
+        #    print('{} at {}'.format(c.path, c))
+        #print(len(self.deck))
             
     def cleanup(self):
         pg.mixer.music.unpause()
