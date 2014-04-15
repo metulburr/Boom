@@ -8,8 +8,8 @@ class Menu(tools.States):
     def __init__(self, screen_rect):
         tools.States.__init__(self)
         self.screen_rect = screen_rect
-        self.options = ['Test', 'View Cards', 'Quit']
-        self.next_list = ['TESTING', 'CARDVIEW']
+        self.options = ['Play', 'View Cards', 'Quit']
+        self.next_list = ['GAME', 'CARDVIEW']
         self.title, self.title_rect = self.make_text('Boom', self.title_color, (self.screen_rect.centerx, 75), 150)
         self.pre_render_options()
         self.from_bottom = 200

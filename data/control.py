@@ -1,7 +1,7 @@
 
 import os
 import pygame as pg
-from .states import menu, splash, viewer, testing
+from .states import menu, splash, viewer, game
 
 class Control():
     def __init__(self, fullscreen, difficulty, size):
@@ -24,7 +24,7 @@ class Control():
             "MENU"     : menu.Menu(self.screen_rect),
             "SPLASH"   : splash.Splash(self.screen_rect),
             'CARDVIEW' : viewer.Viewer(self.screen_rect),
-            'TESTING' : testing.Testing(self.screen_rect),
+            'GAME'     : game.Game(self.screen_rect),
             #'OVERLAY' : overlay.Overlay(self.screen_rect),
         }
 
