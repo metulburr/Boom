@@ -91,7 +91,7 @@ def render_textrect(string, font, rect, text_color, background_color, justificat
     surface = pg.Surface(rect.size).convert()
     #surface.fill(0)
     #surface.set_alpha(0)
-    #surface.fill(background_color)
+    surface.fill(background_color)
 
     accumulated_height = 0
     for line in final_lines:
