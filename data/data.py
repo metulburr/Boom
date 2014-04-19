@@ -121,4 +121,7 @@ if __name__ == '__main__':
     for k,v in data.items():
         print(k,v['info'])
         print(k,v.get('life', 'No "life"'))
+        
+    print('\nCard Types: {}'.format(len(data.values())))
+    print('Card Instances: {}'.format( sum([v['max'] for v in data.values()]) ))
 

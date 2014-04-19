@@ -34,8 +34,8 @@ class Game(tools.States):
         self.bg_rect = self.bg.get_rect()
         self.is_hand_set = False
         
-        self.help_btn_image = tools.Image.load('question.png')
-        self.help_btn_image = pg.transform.scale(self.help_btn_image, (20,25))
+        self.help_btn_image = tools.Image.load('info.png')
+        #self.help_btn_image = pg.transform.scale(self.help_btn_image, (20,25))
         self.help_btn_image_rect = self.help_btn_image.get_rect(topleft=(0,0))
         
         self.settings = tools.Image.load('gear.png')
