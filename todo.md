@@ -17,8 +17,17 @@ TODO List
 * modify card selection to visable part of card and not only just the left side of card
 * ~~add in game help on selected card~~
 * ~~add card view with database help~~
-* add GUI buttons for movement in card viewer
+* ~~add GUI buttons for movement in card viewer~~ 
 * add chat server and chat client
 * add server and client
 * modify card size to fit in screen
 * adjust table to fit 7 players and their area
+* add options submenu
+* add option to change keybindings
+* add volume selector in options
+* add music option on/off
+* add play button to game screen
+* add card removed from hand and onto table if played
+* add more content to background of main menu than just a blank fill screen
+* add game favicon
+* add settings options in-game

@@ -60,7 +60,9 @@ class Button(object):
 
     def on_release(self,event):
         if self.clicked and self.call_on_release:
-            self.function()
+            #if user is still within button rect upon mouse release
+            if self.rect.collidepoint(pg.mouse.get_pos()):
+                self.function()
         self.clicked = False
 
     def check_hover(self):
