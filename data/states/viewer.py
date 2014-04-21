@@ -2,6 +2,7 @@
 
 import pygame as pg
 from .. import tools, data
+from ..GUI import button
 import os
 
 class Viewer(tools.States):
@@ -21,8 +22,22 @@ class Viewer(tools.States):
         self.update_image(0)
         self.database = data.data
         
+        button_config = {
+            "hover_color"        : (150,150,150),
+            "clicked_color"      : (255,255,255),
+            "clicked_font_color" : (0,0,0),
+            "hover_font_color"   : (0,0,0),
+            'font'               : tools.Font.load('impact.ttf', 12)
+        }
+        self.next_button = button.Button((475,150,100,25),(100,100,100), 
+            self.switch_card(1), text='Next', **button_config
+        )
+        self.prev_button = button.Button((225,150,100,25),(100,100,100), 
+            self.switch_card(-1), text='Previous', **button_config
+        )
+        
     def update_category(self, text):
-        self.category, self.category_rect = self.make_text(text, (255,255,255), (self.screen_rect.centerx, 175), 15, fonttype='impact.ttf')
+        self.category, self.category_rect = self.make_text(text, (255,255,255), (self.screen_rect.centerx, 162), 15, fonttype='impact.ttf')
         
     def update_image(self, val):
         self.image = self.cards[val].surf
@@ -42,7 +57,6 @@ class Viewer(tools.States):
             ind = 0
             
         self.update_image(ind)
-        #pg.display.set_caption(self.cards[ind].path)
         self.button_sound.sound.play()
 
     def get_event(self, event, keys):
@@ -62,6 +76,8 @@ class Viewer(tools.States):
             elif event.key == self.keybinding['select']:
                 self.select_option(self.selected_index)
         self.mouse_menu_click(event)
+        self.next_button.check_event(event)
+        self.prev_button.check_event(event)
 
     def update(self, now, keys):
         pg.mouse.set_visible(True)
@@ -92,7 +108,8 @@ class Viewer(tools.States):
                 screen.blit(rend_img,rend_rect)
             else:
                 screen.blit(opt[0],opt[1])
-
+        self.next_button.render(screen)
+        self.prev_button.render(screen)
         
     def cleanup(self):
         pg.display.set_caption("Boom")
