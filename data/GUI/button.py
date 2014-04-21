@@ -57,6 +57,7 @@ class Button(object):
             if not self.call_on_release:
                 self.function()
 
+
     def on_release(self,event):
         if self.clicked and self.call_on_release:
             self.function()

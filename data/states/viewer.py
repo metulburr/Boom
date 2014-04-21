@@ -30,11 +30,13 @@ class Viewer(tools.States):
             'font'               : tools.Font.load('impact.ttf', 12)
         }
         self.next_button = button.Button((475,150,100,25),(100,100,100), 
-            self.switch_card(1), text='Next', **button_config
+            lambda x=1:self.switch_card(x), text='Next', **button_config
         )
         self.prev_button = button.Button((225,150,100,25),(100,100,100), 
-            self.switch_card(-1), text='Previous', **button_config
+            lambda x=-1:self.switch_card(x), text='Previous', **button_config
         )
+    def callback_test(self):
+        print('callback')
         
     def update_category(self, text):
         self.category, self.category_rect = self.make_text(text, (255,255,255), (self.screen_rect.centerx, 162), 15, fonttype='impact.ttf')
