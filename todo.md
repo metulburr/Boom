@@ -33,3 +33,4 @@ TODO List
 * add game favicon
 * add settings options in-game
 * reorganize game state, split into classes
+* ~~add data entry for card action~~
