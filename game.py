@@ -6,7 +6,7 @@ import data.tools
 import argparse
 import sys
 
-parser = argparse.ArgumentParser(description='Pong Arguments')
+parser = argparse.ArgumentParser(description='Boom Arguments')
 parser.add_argument('-c','--clean', action='store_true', 
     help='Remove all .pyc files and __pycache__ directories')
 parser.add_argument('-f' , '--fullscreen', action='store_true',

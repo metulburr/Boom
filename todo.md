@@ -26,8 +26,9 @@ TODO List
 * add option to change keybindings
 * add volume selector in options
 * add music option on/off
-* add play button to game screen
+* ~~add play button to game screen~~
 * add card removed from hand and onto table if played
+* display table on board
 * add more content to background of main menu than just a blank fill screen
 * add game favicon
 * add settings options in-game
