@@ -32,3 +32,4 @@ TODO List
 * add more content to background of main menu than just a blank fill screen
 * add game favicon
 * add settings options in-game
+* reorganize game state, split into classes
