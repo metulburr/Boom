@@ -4,7 +4,7 @@ TODO List
 * transfer gold rush expansion pack cards into Boom cards
 * transfer dodge city expansion pack cards into Boom cards
 * transfer the rest of the base game into Boom cards
-* create backend side of card
+* ~~create backend side of card~~
 
 ###music/sounds
 * add more music
@@ -34,3 +34,4 @@ TODO List
 * add settings options in-game
 * reorganize game state, split into classes
 * ~~add data entry for card action~~
+* add self updater
