@@ -134,6 +134,7 @@ data = {
         'life':4,
         'max':1,
     },
+#other (non playable cards)
     'backend':{
         'info':'Cards back side',
         'max':0
