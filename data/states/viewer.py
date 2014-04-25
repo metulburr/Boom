@@ -77,6 +77,10 @@ class Viewer(tools.States):
                 
             elif event.key == self.keybinding['select']:
                 self.select_option(self.selected_index)
+        elif event.type == self.background_music.track_end:
+            self.background_music.track = (self.background_music.track+1) % len(self.background_music.tracks)
+            pg.mixer.music.load(self.background_music.tracks[self.background_music.track]) 
+            pg.mixer.music.play()
         self.mouse_menu_click(event)
         self.next_button.check_event(event)
         self.prev_button.check_event(event)
