@@ -177,7 +177,7 @@ class Game(tools.States):
     def get_hand_cards(self):
         hand_cards = []
         for card in self.deck:
-            if tools.get_category(card.path) not in ['roles', 'characters']:
+            if tools.get_category(card.path) not in ['roles', 'characters','nonplay']:
                 hand_cards.append(card)
         return hand_cards
         

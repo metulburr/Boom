@@ -134,6 +134,10 @@ data = {
         'life':4,
         'max':1,
     },
+    'backend':{
+        'info':'Cards back side',
+        'max':0
+    }
 }
 
 if __name__ == '__main__':
