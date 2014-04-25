@@ -199,7 +199,7 @@ class Game(tools.States):
         #print(len(self.deck))
             
     def cleanup(self):
-        pg.mixer.music.unpause()
+        pass#pg.mixer.music.unpause()
         #pg.mixer.music.stop()
         #self.background_music.setup(self.background_music_volume)
         
@@ -207,5 +207,5 @@ class Game(tools.States):
         if not self.is_hand_set:
             self.is_hand_set = True
             self.hand = self.set_hand(4)
-        pg.mixer.music.pause()
+        pass#pg.mixer.music.pause()
         #pg.mixer.music.play()
